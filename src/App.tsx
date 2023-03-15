@@ -8,7 +8,7 @@ import Profile from "./component/Profile/Profile";
 function App() {
   return (
     <Router>
-      <div>
+      <div className="App">
         <nav className="nav_Bar">
           <Link className="nav_item" to="/">
             Home
