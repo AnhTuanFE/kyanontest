@@ -27,3 +27,8 @@
   margin: 10px 20px;
   box-sizing: border-box;
 }
+.frame-error {
+}
+.error-message {
+  color: red;
+}

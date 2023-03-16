@@ -14,11 +14,17 @@
   box-shadow: 0 1px 11px rgba(168, 168, 168, 0.27);
   flex: 0 0 33.33%;
   height: 520px;
+  padding-top: 10%;
+}
+.wrap_form_item {
 }
 .form_items_title {
   text-align: center;
+  font-weight: 600;
+  padding-bottom: 14px;
 }
 .form_items {
+  margin-bottom: 12px;
 }
 .form_info {
   width: 100%;
@@ -28,12 +34,15 @@
 }
 .form_data {
   width: 100%;
-  padding: 10px 15px;
+  padding: 8px 16px;
   border: 1.8px solid #e4e4e4;
   border-radius: 5px;
-  color: #dedfe1;
+  font-size: 16px;
 }
-
+.form_data::placeholder {
+  color: #abadb2;
+  font-weight: 600;
+}
 .wrap_button {
   display: flex;
   justify-content: space-between;
@@ -51,6 +60,6 @@
   background-color: #2e09db;
   color: #fff;
   border-radius: 5px;
-  padding: 2px 18px;
+  padding: 4px 18px;
   border: none;
 }
