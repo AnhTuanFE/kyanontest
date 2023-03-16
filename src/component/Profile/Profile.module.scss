@@ -1,5 +1,3 @@
-.title {
-}
 .wrap_profile_form {
   display: flex;
   justify-content: center;
@@ -15,12 +13,14 @@
   flex: 0 0 33.33%;
   height: 520px;
 }
+.form_title {
+  margin-bottom: 12%;
+  font-weight: 700;
+}
 .form_info {
   width: 100%;
   font-weight: 400;
   color: #aeb1b5;
-  padding-bottom: 8px;
-  padding-top: 16px;
 }
 .form_data {
   width: 100%;
@@ -30,6 +30,7 @@
   // color: #dedfe1;
   font-size: 16px;
   margin-bottom: 12px;
+  margin-top: 5px;
 }
 .frame_error {
 }
@@ -47,6 +48,7 @@
   border-radius: 5px;
   padding: 4px 10px;
   border: none;
+  cursor: pointer;
 }
 .button_update {
   background-color: #2e09db;
@@ -58,4 +60,21 @@
   color: #2e09db;
   background-color: #f6f4ff;
   font-weight: 600;
+}
+
+@media screen and (max-width: 46.1875em) {
+  .wrap_form {
+    flex: 0 0 80%;
+  }
+}
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+  .wrap_form {
+    flex: 0 0 50%;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .wrap_form {
+    flex: 0 0 30%;
+  }
 }

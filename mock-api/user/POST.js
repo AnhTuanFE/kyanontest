@@ -1,6 +1,5 @@
 module.exports = (request, response) => {
   const user = request.body;
-  // console.log("==> user email", user);
   if (
     user.inforLogin.email == "anhtuan@keyanon.digital" &&
     user.inforLogin.password == "123456"

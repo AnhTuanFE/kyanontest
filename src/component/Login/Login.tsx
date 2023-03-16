@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 import styles from "./Login.module.scss";
 import axios from "axios";
@@ -59,16 +59,16 @@ function Login() {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .required("Vui lòng nhập đầy đủ thông tin email*")
-        .email("Vui lòng nhập địa chỉ email hợp lệ"),
+        .required("Please enter your full email information*")
+        .email("Please enter a valid email address"),
 
-      password: Yup.string().required("Vui lòng nhập mật khẩu*"),
+      password: Yup.string().required("Please enter a password*"),
     }),
     onSubmit: (value: IUser["user"]) => {
       submitHandleLogin(value);
     },
   });
-  //==========================
+
   return (
     <div className={clsx(styles.wrap_Login)}>
       <div className={clsx(styles.wrap_login_form)}>
@@ -127,6 +127,7 @@ function Login() {
                   id={"show_pass"}
                   type={"checkbox"}
                   onChange={togglePassword}
+                  className={clsx(styles.button_item)}
                 ></input>
                 <label className={clsx(styles.button_items_title)}>
                   Show password

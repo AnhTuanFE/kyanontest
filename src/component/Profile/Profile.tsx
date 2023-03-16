@@ -13,8 +13,7 @@ interface IProfile {
   phone: string;
 }
 function Profile() {
-  const [dataUser, setDataUser] = useState();
-  const [dataID, setDataID] = useState<number>();
+  const [dataUser, setDataUser] = useState<IProfile>();
 
   // get data from api
   const getData = async () => {
@@ -25,25 +24,19 @@ function Profile() {
         },
       };
       const { data } = await axios.get(`/api/user/`, config);
-      let da = data;
-      setDataUser(da);
-      setDataID(da.id);
-      console.log("===> data", data);
-      console.log("==> data user", dataUser);
-      console.log("==> data id", dataID);
+      setDataUser(data);
     } catch (err) {
-      alert("lỗi không xác định");
+      alert("server error !!");
       return 0;
     }
   };
-  // lấy dữ liệu
+
+  // Get data from mock API
   useEffect(() => {
-    // const infor: Promise<any> = getData();
-    // setDataUser(infor);
-    // console.log("===> dataUser", infor);
     getData();
   }, []);
-  //=============validate=====
+
+  // function validate
   const validateProfile = useFormik({
     initialValues: {
       email: "",
@@ -51,31 +44,41 @@ function Profile() {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .required("Vui lòng nhập đầy đủ thông tin email*")
-        .email("Vui lòng nhập địa chỉ email hợp lệ"),
+        .required("Please enter your full email information*")
+        .email("Please enter a valid email address"),
 
-      phone: Yup.string().required("Vui lòng nhập số điện thoại*"),
+      phone: Yup.string().required("Please enter the phone number*"),
     }),
     onSubmit: (value) => {},
   });
-  //==========================
+
+  const choossePhoneNumber = () => {
+    if (validateProfile.values.phone) {
+      return validateProfile.values.phone;
+    } else return dataUser?.phone;
+  };
+  const choosseEmail = () => {
+    if (validateProfile.values.email) {
+      return validateProfile.values.email;
+    } else return dataUser?.email;
+  };
   return (
     <div>
       <div className={clsx(styles.wrap_profile_form)}>
         <form className={clsx(styles.wrap_form)}>
-          <div className={clsx(styles.title)}>
-            <h5>Profile</h5>
+          <div className={clsx(styles.form_title)}>
+            <label>Profile</label>
           </div>
           <label className={clsx(styles.form_info)}>Full name:</label>
           <input
             className={clsx(styles.form_data)}
-            value={"fullname"}
+            defaultValue={dataUser?.fullName}
             name={"fullname"}
           ></input>
           <label className={clsx(styles.form_info)}>Date Of Birth:</label>
           <input
             className={clsx(styles.form_data)}
-            value={"date"}
+            defaultValue={dataUser?.dateOfbirth}
             name={"date"}
           ></input>
           <label className={clsx(styles.form_info)}>Email:</label>
@@ -83,11 +86,10 @@ function Profile() {
             className={clsx(styles.form_data)}
             type={"email"}
             name={"email"}
-            value={validateProfile.values.email}
+            defaultValue={choosseEmail()}
             onChange={validateProfile.handleChange}
             onBlur={validateProfile.handleBlur}
           ></input>
-          {/*  */}
           <div className="frame-error">
             {validateProfile.touched.email && validateProfile.errors.email ? (
               <span className="error-message">
@@ -95,17 +97,15 @@ function Profile() {
               </span>
             ) : null}
           </div>
-          {/*  */}
           <label className={clsx(styles.form_info)}>Phone:</label>
           <input
+            className={clsx(styles.form_data)}
             type={"text"}
             name={"phone"}
-            className={clsx(styles.form_data)}
-            value={validateProfile.values.phone}
+            defaultValue={choossePhoneNumber()}
             onChange={validateProfile.handleChange}
             onBlur={validateProfile.handleBlur}
           ></input>
-          {/*  */}
           <div className="frame-error">
             {validateProfile.touched.phone && validateProfile.errors.phone ? (
               <span className="error-message">
@@ -113,7 +113,6 @@ function Profile() {
               </span>
             ) : null}
           </div>
-          {/*  */}
           <div className={clsx(styles.wrap_button)}>
             <button className={clsx(styles.button_cancel)}>Cancel</button>
             <button className={clsx(styles.button_update)}>Update</button>
